@@ -13,5 +13,6 @@ Repo para el juego de la GGJ 2019
 # Ideas
   - Tenes que rescatar a tu familia y llevarla a tu casa.
   - Cada integrante de tu familia es como un boss y cada uno tiene como su mundo que tiene atributos diferentes acordes a quien es la familia.
+  - Defender un lugar que vos consideras como tu home.
 
 # TO-DO
