@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour
     public GameObject crosshair;
     public float interactDistance = 3f;
     public Text eInteractText;
+    public float mouseSensitivity = 1;
+    
+    public float maxAngle = 30;
 
     private float movementX = 0f;
     private float movementY = 0f;
+    private float xAxisClamp = 0.0f;
     private Transform playerTransform;
 
     private const float EPSILON = 0.0000000001f;
@@ -21,13 +25,13 @@ public class PlayerController : MonoBehaviour
 
     private InteractableItem itemToInteract;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         this.playerTransform = gameObject.transform;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         UpdateMovement();
@@ -60,23 +64,53 @@ public class PlayerController : MonoBehaviour
     }
 
     //Player camera rotation
-    private void UpdateRotation()
-    {
-        float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
-        float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
-        transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
+    /* private void UpdateRotation()
+     {
+         float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
+         float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
+         transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
 
-        //if (Mathf.Abs(transform.localRotation.x) > 0.5)
-        //{
-        //    transform.localRotation = new Quaternion(Mathf.Sign(transform.localRotation.x) * 0.5f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
-        //}
-        //if (Mathf.Abs(transform.localRotation.y) > 0.5)
-        //{
-        //    transform.localRotation = new Quaternion(transform.localRotation.x, Mathf.Sign(transform.localRotation.y) * 0.5f, transform.localRotation.z, transform.localRotation.w);
-        //}
+         //if (Mathf.Abs(transform.localRotation.x) > 0.5)
+         //{
+         //    transform.localRotation = new Quaternion(Mathf.Sign(transform.localRotation.x) * 0.5f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
+         //}
+         //if (Mathf.Abs(transform.localRotation.y) > 0.5)
+         //{
+         //    transform.localRotation = new Quaternion(transform.localRotation.x, Mathf.Sign(transform.localRotation.y) * 0.5f, transform.localRotation.z, transform.localRotation.w);
+         //}
 
-        //Debug.Log(transform.localRotation);
-        //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
+         //Debug.Log(transform.localRotation);
+         //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
+     }*/
+
+    private void UpdateRotation() {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        float rotAmountX = mouseX * mouseSensitivity;
+        float rotAmountY = mouseY * mouseSensitivity;
+
+        
+        xAxisClamp -= rotAmountY;
+
+        Vector3 targetRotCam = transform.rotation.eulerAngles;
+
+        targetRotCam.x -= rotAmountY;
+        targetRotCam.z = 0;
+        targetRotCam.y += rotAmountX;
+
+        if (xAxisClamp > maxAngle) {
+            xAxisClamp = maxAngle;
+            targetRotCam.x = maxAngle;
+        } else if (xAxisClamp < -maxAngle) {
+            xAxisClamp = -maxAngle;
+            targetRotCam.x = 360 - maxAngle;
+        }
+
+
+        transform.rotation = Quaternion.Euler(targetRotCam);
+
+
     }
 
     private InteractableItem CheckIfInteractable()
