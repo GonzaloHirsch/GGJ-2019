@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
         this.instance = this;
         DontDestroyOnLoad(this);
 
+        Cursor.visible = false;
+
 
         this.playerTransform = player.transform;
     }
@@ -40,10 +42,12 @@ public class GameController : MonoBehaviour
         switch (mode)
         {
             case "ToFlashback":
-                player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = true;
                 break;
             case "ToNormal":
-                player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = false;
+                //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 break;
         }
     }

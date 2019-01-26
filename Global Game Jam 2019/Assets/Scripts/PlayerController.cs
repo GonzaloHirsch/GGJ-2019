@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float walkingSpeed = 10f;
-    public float playerHeight = 1.9f;
+    public float playerHeightNormal = 1.9f;
+    public float playerHeightFlashback = 5f;
     public Camera camera;
     public GameObject crosshair;
     public float interactDistance = 3f;
     public Text eInteractText;
     public float mouseSensitivity = 1;
+    public bool isInFlashback = false;
     
     public float maxAngle = 30;
 
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Mantain player height
-        this.playerTransform.position = new Vector3(playerTransform.position.x, playerHeight, playerTransform.position.z);
+        this.playerTransform.position = new Vector3(playerTransform.position.x, isInFlashback ? playerHeightFlashback : playerHeightNormal, playerTransform.position.z);
     }
 
     //Player camera rotation
