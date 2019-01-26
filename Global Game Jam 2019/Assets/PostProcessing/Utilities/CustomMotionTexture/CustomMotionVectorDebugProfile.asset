@@ -41,7 +41,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       intensity: 1
       radius: 0.3
@@ -122,7 +122,7 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: -13
+        temperature: 20
         tint: 0
         hueShift: 0
         saturation: 0.23
@@ -139,9 +139,9 @@ MonoBehaviour:
           power: {r: 1, g: 1, b: 1, a: 0}
           offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
-          lift: {r: 0, g: 0, b: 0, a: 0}
-          gamma: {r: 0, g: 0, b: 0, a: 0}
-          gain: {r: 0, g: 0, b: 0, a: 0}
+          lift: {r: 1, g: 1, b: 1, a: 0}
+          gamma: {r: 1, g: 1, b: 1, a: 0}
+          gain: {r: 1, g: 1, b: 1, a: 0}
       curves:
         master:
           curve:
@@ -309,22 +309,22 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 0.048
   grain:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      colored: 1
-      intensity: 0.25
-      size: 0.78
-      luminanceContribution: 0.35
+      colored: 0
+      intensity: 0.2
+      size: 0.7
+      luminanceContribution: 0.2
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0.7830189, g: 0.2474635, b: 0.2474635, a: 1}
+      color: {r: 0.35686275, g: 0.13598174, b: 0.07843137, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.45
-      smoothness: 0.2
+      intensity: 0.571
+      smoothness: 0.323
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
