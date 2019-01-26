@@ -44,9 +44,11 @@ public class GameController : MonoBehaviour
             case "ToFlashback":
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
+                player.transform.localRotation = Quaternion.identity;
                 break;
             case "ToNormal":
                 player.GetComponent<PlayerController>().isInFlashback = false;
+                player.transform.localRotation = Quaternion.identity;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 break;
         }
