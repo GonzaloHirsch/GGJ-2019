@@ -12,6 +12,7 @@ public class InteractableItemFlashback : InteractableItem
     public int mode = 1;
     public string flashbackText;
     public string text;
+    public int flashbackNumber = 1;
 
     // Start is called before the first frame update
     void Start()

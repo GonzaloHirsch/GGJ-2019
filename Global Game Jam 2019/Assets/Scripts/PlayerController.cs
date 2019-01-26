@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float playerHeightFlashback = 5f;
     public Camera camera;
     public GameObject crosshair;
-    public float interactDistance = 3f;
+    public float interactDistance = 5f;
     public Text eInteractText;
     public float mouseSensitivity = 1;
     public bool isInFlashback = false;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastCursorPosition;
 
     private InteractableItem itemToInteract;
+    private DoorRotator doorToRotate;
 
     
     void Start()
@@ -39,10 +40,15 @@ public class PlayerController : MonoBehaviour
         UpdateMovement();
         UpdateRotation();
         this.itemToInteract = CheckIfInteractable();
+        this.doorToRotate = CheckIfDoor();
 
         if (itemToInteract != null && Input.GetKeyDown(KeyCode.E))
         {
             this.itemToInteract.Interact();
+        }
+        if (doorToRotate != null && Input.GetKeyDown(KeyCode.E))
+        {
+            this.doorToRotate.interacted = true;
         }
     }
 
@@ -65,27 +71,8 @@ public class PlayerController : MonoBehaviour
 
         //Mantain player height
         this.playerTransform.position = new Vector3(playerTransform.position.x, isInFlashback ? playerHeightFlashback : playerHeightNormal, playerTransform.position.z);
+        this.playerTransform.position = new Vector3(playerTransform.position.x, playerHeightNormal, playerTransform.position.z);
     }
-
-    //Player camera rotation
-    /* private void UpdateRotation()
-     {
-         float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
-         float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
-         transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
-
-         //if (Mathf.Abs(transform.localRotation.x) > 0.5)
-         //{
-         //    transform.localRotation = new Quaternion(Mathf.Sign(transform.localRotation.x) * 0.5f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
-         //}
-         //if (Mathf.Abs(transform.localRotation.y) > 0.5)
-         //{
-         //    transform.localRotation = new Quaternion(transform.localRotation.x, Mathf.Sign(transform.localRotation.y) * 0.5f, transform.localRotation.z, transform.localRotation.w);
-         //}
-
-         //Debug.Log(transform.localRotation);
-         //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
-     }*/
 
     private void UpdateRotation() {
         float mouseX = Input.GetAxis("Mouse X");
@@ -135,6 +122,20 @@ public class PlayerController : MonoBehaviour
         }else {
             eInteractText.gameObject.SetActive(false);
         }
+        return collision;
+    }
+
+    private DoorRotator CheckIfDoor()
+    {
+        RaycastHit hit;
+        Physics.Raycast(transform.position, playerTransform.forward, out hit, interactDistance);
+        DoorRotator collision = null;
+        Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
+        if (hit.collider != null)
+        {
+            collision = hit.collider.gameObject.GetComponent<DoorRotator>();
+        }
+        Debug.Log(hit.collider.gameObject);
         return collision;
     }
 }

@@ -13,12 +13,16 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public Camera camera;
     private Transform playerTransform;
+    public GameObject flashbackCocina;
 
     private GameController instance;
+    //private Flashback flashbackCocinaController;
 
     // Start is called before the first frame update
     void Start()
     {
+        //flashbackCocinaController = flashbackCocina.GetComponent<Flashback>();
+
         //Singleton GameController
         if (instance != this)
             Destroy(instance);
@@ -43,12 +47,45 @@ public class GameController : MonoBehaviour
     {
         switch (mode)
         {
+            //Go to flashback cocina
+            case 4:
+                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = true;
+                //player.transform.localRotation = Quaternion.identity;
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+
+                //flashbackCocina.SetUpFlashback();
+                break;
+            //Go to flashback cocina
+            case 3:
+                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = true;
+                //player.transform.localRotation = Quaternion.identity;
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+
+                //flashbackCocina.SetUpFlashback();
+                break;
+            //Go to flashback cocina
+            case 2:
+                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = true;
+                //player.transform.localRotation = Quaternion.identity;
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+
+                //flashbackCocina.SetUpFlashback();
+                break;
+            //Go to flashback cocina
             case 1:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
-                player.transform.localRotation = Quaternion.identity;
+                //player.transform.localRotation = Quaternion.identity;
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+
+                //flashbackCocina.SetUpFlashback();
                 break;
             case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;
