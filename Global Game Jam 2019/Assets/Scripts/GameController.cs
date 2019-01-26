@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
     }
 
     //TODO: Hacer que renderee y desrenderee el modelo que no se esta usando
-    private void MovePlayer(string mode = "ToFlashback")
+    public void MovePlayer(string mode = "ToFlashback")
     {
         switch (mode)
         {
