@@ -63,6 +63,17 @@ public class PlayerController : MonoBehaviour
         float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
         float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
         transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
+
+        //if (Mathf.Abs(transform.localRotation.x) > 0.5)
+        //{
+        //    transform.localRotation = new Quaternion(Mathf.Sign(transform.localRotation.x) * 0.5f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
+        //}
+        //if (Mathf.Abs(transform.localRotation.y) > 0.5)
+        //{
+        //    transform.localRotation = new Quaternion(transform.localRotation.x, Mathf.Sign(transform.localRotation.y) * 0.5f, transform.localRotation.z, transform.localRotation.w);
+        //}
+
+        //Debug.Log(transform.localRotation);
         //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
     }
 
