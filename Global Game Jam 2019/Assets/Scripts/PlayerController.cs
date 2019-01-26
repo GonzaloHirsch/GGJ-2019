@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float walkingSpeed = 10f;
+    public Camera camera;
 
     private float movementX = 0f;
     private float movementY = 0f;
     private Transform playerTransform;
 
     private const float EPSILON = 0.0000000001f;
+    private Vector2 lastCursorPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateMovement();
+        UpdateRotation();
     }
 
     private void UpdateMovement()
@@ -31,12 +34,19 @@ public class PlayerController : MonoBehaviour
 
         if (System.Math.Abs(this.movementX) > EPSILON)
         {
-            this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime);
+            this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
         }
         if (System.Math.Abs(this.movementY) > EPSILON)
         {
-            this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime);
+            this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
         }
+    }
 
+    private void UpdateRotation()
+    {
+        float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
+        float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
+        transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
+        //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
     }
 }
