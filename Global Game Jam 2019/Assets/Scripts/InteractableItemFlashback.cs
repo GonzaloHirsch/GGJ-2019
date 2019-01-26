@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class InteractableItemFlashback : InteractableItem
 {
+    /*
+     * 1 = toflashback
+     * 0 = tonormal   
+     */  
+    public int mode = 1;
+    public string flashbackText;
+    public string text;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +27,28 @@ public class InteractableItemFlashback : InteractableItem
 
     public override void Interact()
     {
-
+        switch (mode)
+        {
+            case 1:
+                text = flashbackText;
+                break;
+            case 0:
+                text = textToShow;
+                break;
+        }
         StartCoroutine(WaitforText());
     }
 
     private void GoToFlashback()
     {
-        this.gameController.GetComponent<GameController>().MovePlayer();
+        this.gameController.GetComponent<GameController>().MovePlayer(mode);
+        mode = 1 - mode;
     }
 
     public override IEnumerator WaitforText()
     {
         textLabel.gameObject.SetActive(true);
-        textLabel.text = textToShow;
+        textLabel.text = text;
 
         yield return new WaitForSeconds(this.timeToRead);
 

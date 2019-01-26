@@ -37,16 +37,16 @@ public class GameController : MonoBehaviour
     }
 
     //TODO: Hacer que renderee y desrenderee el modelo que no se esta usando
-    public void MovePlayer(string mode = "ToFlashback")
+    public void MovePlayer(int mode = 1)
     {
         switch (mode)
         {
-            case "ToFlashback":
+            case 1:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 player.transform.localRotation = Quaternion.identity;
                 break;
-            case "ToNormal":
+            case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 player.transform.localRotation = Quaternion.identity;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
