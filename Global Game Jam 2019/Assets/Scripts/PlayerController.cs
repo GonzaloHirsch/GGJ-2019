@@ -52,14 +52,16 @@ public class PlayerController : MonoBehaviour
         this.movementX = Input.GetAxisRaw("Horizontal");
         this.movementY = Input.GetAxisRaw("Vertical");
 
-        if (System.Math.Abs(this.movementX) > EPSILON)
-        {
-            this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
-        }
-        if (System.Math.Abs(this.movementY) > EPSILON)
-        {
-            this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
-        }
+        this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
+        this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
+        //if (System.Math.Abs(this.movementX) > EPSILON)
+        //{
+        //    this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
+        //}
+        //if (System.Math.Abs(this.movementY) > EPSILON)
+        //{
+        //    this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
+        //}
 
         //Mantain player height
         this.playerTransform.position = new Vector3(playerTransform.position.x, isInFlashback ? playerHeightFlashback : playerHeightNormal, playerTransform.position.z);
