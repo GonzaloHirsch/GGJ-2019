@@ -2,5 +2,7 @@
 
 public abstract class InteractableItem : MonoBehaviour
 {
-    public abstract void Interact();
+    public void Interact() {
+
+    }
 }
