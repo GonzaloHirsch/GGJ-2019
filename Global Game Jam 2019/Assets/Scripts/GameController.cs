@@ -12,9 +12,19 @@ public class GameController : MonoBehaviour
     public GameObject player;
     private Transform playerTransform;
 
+    private GameController instance;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Singleton GameController
+        if (instance != this)
+            Destroy(instance);
+
+        this.instance = this;
+        DontDestroyOnLoad(this);
+
+
         this.playerTransform = player.transform;
     }
 

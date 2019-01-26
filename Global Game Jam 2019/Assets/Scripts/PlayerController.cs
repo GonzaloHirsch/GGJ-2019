@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     public GameObject crosshair;
     public float interactDistance = 3f;
+    public Text eInteractText;
 
     private float movementX = 0f;
     private float movementY = 0f;
@@ -80,16 +82,20 @@ public class PlayerController : MonoBehaviour
     private InteractableItem CheckIfInteractable()
     {
         RaycastHit hit;
-        Physics.Raycast(crosshair.transform.position, playerTransform.forward, out hit, interactDistance);
+        Physics.Raycast(transform.position, playerTransform.forward, out hit, interactDistance);
         InteractableItem collision = null;
-
+        //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
             collision = hit.collider.gameObject.GetComponent<InteractableItem>();
-            if (collision != null)
-            {
-                //TODO: Mostrar que puede interactuar
+            
+            if (collision != null) {
+                eInteractText.gameObject.SetActive(true);
+            } else {
+                eInteractText.gameObject.SetActive(false);
             }
+        }else {
+            eInteractText.gameObject.SetActive(false);
         }
         return collision;
     }
