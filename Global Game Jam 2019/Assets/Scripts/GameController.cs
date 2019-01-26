@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
     public float distanceToFlashbackModel = 32f;
 
     public GameObject player;
+    public Camera camera;
     private Transform playerTransform;
 
     private GameController instance;
@@ -45,10 +47,14 @@ public class GameController : MonoBehaviour
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 player.transform.localRotation = Quaternion.identity;
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
                 break;
             case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 player.transform.localRotation = Quaternion.identity;
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = false;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 break;
         }
