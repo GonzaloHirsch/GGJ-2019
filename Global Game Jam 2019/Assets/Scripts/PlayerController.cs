@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float walkingSpeed = 10f;
     public float playerHeight = 1.9f;
     public Camera camera;
+    public GameObject crosshair;
+    public float interactDistance = 3f;
 
     private float movementX = 0f;
     private float movementY = 0f;
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private const float EPSILON = 0.0000000001f;
     private Vector2 lastCursorPosition;
+
+    private InteractableItem itemToInteract;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,12 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMovement();
         UpdateRotation();
+        this.itemToInteract = CheckIfInteractable();
+
+        if (itemToInteract != null && Input.GetKeyDown(KeyCode.E))
+        {
+            this.itemToInteract.Interact();
+        }
     }
 
     private void UpdateMovement()
@@ -50,5 +60,19 @@ public class PlayerController : MonoBehaviour
         float mouseY = (Input.mousePosition.y / Screen.height) - 0.5f;
         transform.localRotation = Quaternion.Euler(new Vector4(-1f * (mouseY * 180f), mouseX * 360f, transform.localRotation.z));
         //transform.LookAt(camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane)), Vector3.up);
+    }
+
+    private InteractableItem CheckIfInteractable()
+    {
+        RaycastHit hit;
+        Physics.Raycast(crosshair.transform.position, playerTransform.forward, out hit, interactDistance);
+
+        InteractableItem collision = hit.collider.gameObject.GetComponent<InteractableItem>();
+        if (collision != null)
+        {
+            //TODO: Mostrar que puede interactuar
+        }
+
+        return collision;
     }
 }
