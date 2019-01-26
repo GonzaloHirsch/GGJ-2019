@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractableItemFlashback : InteractableItem
+public class InteractableItemFlashback : InteractableItemText
 {
     /*
      * 1 = toflashback
@@ -38,6 +38,7 @@ public class InteractableItemFlashback : InteractableItem
                 break;
         }
         StartCoroutine(WaitforText());
+        gameController.GetComponent<GameController>().getCurrentFlashBack().nextStep();
     }
 
     private void GoToFlashback()

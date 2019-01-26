@@ -6,7 +6,7 @@ public abstract class Flashback : MonoBehaviour
 {
     public Material outlineMaterial;
 
-    public int flashBackId;
+    private int flashBackId;
     public GameObject[] flashbackObjects;
     public InteractableItemText[] interactObjectsComponents;
     public MeshRenderer[] interactObjMaterials, oldMeshRenderers;
@@ -20,13 +20,16 @@ public abstract class Flashback : MonoBehaviour
             interactObjMaterials[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
             if( i != 0) {
                 interactObjectsComponents[i].enabled = false;
+            }else {
+                interactObjMaterials[i].material = outlineMaterial;
             }
             oldMeshRenderers[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
         }
         flashbackObjIndex = 0;
+        //acá trabar la salida
     }
 
-    void nextStep() {
+    public void nextStep() {
         //cambiar mi material
         interactObjMaterials[flashbackObjIndex] = oldMeshRenderers[flashbackObjIndex];
         //deshabilitar mi interración

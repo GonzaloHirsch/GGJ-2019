@@ -10,11 +10,14 @@ public class GameController : MonoBehaviour
     //Distance to the alternate model
     public float distanceToFlashbackModel = 32f;
     public Flashback[] flashbacks;
+    public Flashback currentFlashBack;
+    private int flashbackIndex;
 
     public GameObject player;
     public Camera camera;
     private Transform playerTransform;
     public GameObject flashbackCocina;
+    
 
     private GameController instance;
     //private Flashback flashbackCocinaController;
@@ -32,7 +35,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this);
 
         Cursor.visible = false;
-
+        flashbackIndex = 0;
 
         this.playerTransform = player.transform;
     }
@@ -96,5 +99,9 @@ public class GameController : MonoBehaviour
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 break;
         }
+    }
+
+    public Flashback getCurrentFlashBack() {
+        return flashbacks[flashbackIndex];
     }
 }
