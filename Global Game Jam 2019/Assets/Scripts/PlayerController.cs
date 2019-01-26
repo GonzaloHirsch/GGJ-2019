@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //PLayer movement
     private void UpdateMovement()
     {
         this.movementX = Input.GetAxisRaw("Horizontal");
@@ -51,9 +52,12 @@ public class PlayerController : MonoBehaviour
         {
             this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
         }
+
+        //Mantain player height
         this.playerTransform.position = new Vector3(playerTransform.position.x, playerHeight, playerTransform.position.z);
     }
 
+    //Player camera rotation
     private void UpdateRotation()
     {
         float mouseX = (Input.mousePosition.x / Screen.width) - 0.5f;
@@ -66,12 +70,17 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(crosshair.transform.position, playerTransform.forward, out hit, interactDistance);
+        InteractableItem collision = null;
 
-        InteractableItem collision = hit.collider.gameObject.GetComponent<InteractableItem>();
-        if (collision != null)
+        if (hit.collider != null)
         {
-            //TODO: Mostrar que puede interactuar
+            collision = hit.collider.gameObject.GetComponent<InteractableItem>();
+            if (collision != null)
+            {
+                //TODO: Mostrar que puede interactuar
+            }
         }
+
 
         return collision;
     }
