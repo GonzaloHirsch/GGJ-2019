@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public bool isFlashback = false;
     //Distance to the alternate model
     public float distanceToFlashbackModel = 32f;
+    public Flashback[] flashbacks;
 
     public GameObject player;
     public Camera camera;

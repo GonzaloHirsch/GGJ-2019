@@ -18,10 +18,10 @@ public abstract class Flashback : MonoBehaviour
         for(int i = 0; i < flashbackObjects.Length; i++) {
             interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemText>();
             interactObjMaterials[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
+            if( i != 0) {
+                interactObjectsComponents[i].enabled = false;
+            }
             oldMeshRenderers[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
-        }
-        for(int i = 1; i < flashbackObjects.Length; i++) {
-            interactObjectsComponents[i].enabled = false;
         }
         flashbackObjIndex = 0;
     }
