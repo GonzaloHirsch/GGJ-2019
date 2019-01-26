@@ -67,11 +67,15 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(crosshair.transform.position, playerTransform.forward, out hit, interactDistance);
 
-        InteractableItem collision = hit.collider.gameObject.GetComponent<InteractableItem>();
-        if (collision != null)
-        {
-            //TODO: Mostrar que puede interactuar
+        if(hit != null) {
+            InteractableItem collision = hit.collider.gameObject.GetComponent<InteractableItem>();
+            if (collision != null)
+            {
+                //TODO: Mostrar que puede interactuar
+            }
         }
+        
+        
 
         return collision;
     }
