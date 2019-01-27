@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     public float maxAngle = 40;
 
+    private bool hasSecret = false;
+
     private float movementX = 0f;
     private float movementY = 0f;
     private float xAxisClamp = 0.0f;
@@ -69,9 +71,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Secret Room")
         {
-            plantHolder.SetActive(true);
-            plantHolder.GetComponent<AudioSource>().Play();
-            plantHolder.GetComponent<AudioSource>().volume = 1f;
+            if (!hasSecret)
+            {
+                plantHolder.SetActive(true);
+                plantHolder.GetComponent<AudioSource>().Play();
+                plantHolder.GetComponent<AudioSource>().volume = 1f;
+            }
+            else
+            {
+                plantHolder.SetActive(false);
+                plantHolder.GetComponent<AudioSource>().Stop();
+                //plantHolder.GetComponent<AudioSource>().volume = 1f;
+            }
         }
         else
         {
