@@ -86,10 +86,10 @@ public class GameController : MonoBehaviour
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
-
+                
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
-                //flashbackCocina.SetUpFlashback();
+                flashbacks[0].SetUpFlashback();
                 break;
             case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;

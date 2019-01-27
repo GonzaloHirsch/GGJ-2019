@@ -6,14 +6,14 @@ public abstract class Flashback : MonoBehaviour
 {
     public Material outlineMaterial;
 
-    private int flashBackId;
+    public int flashBackId;
     public GameObject[] flashbackObjects;
     public InteractableItemText[] interactObjectsComponents;
     public MeshRenderer[] interactObjMaterials, oldMeshRenderers;
 
     private int flashbackObjIndex;
 
-    void SetUpFlashback() {
+    public void SetUpFlashback() {
         interactObjectsComponents = new InteractableItemText[flashbackObjects.Length];
         for(int i = 0; i < flashbackObjects.Length; i++) {
             interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemText>();
