@@ -84,20 +84,26 @@ public class PlayerController : MonoBehaviour
         this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
         this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
 
-        //if (movementX < 0 || movementX > 0 || movementY < 0 || movementY > 0)
-            //musicManager.
-        //if (System.Math.Abs(this.movementX) > EPSILON)
-        //{
-        //    this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
-        //}
-        //if (System.Math.Abs(this.movementY) > EPSILON)
-        //{
-        //    this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
-        //}
+        if ((movementX < 0 || movementX > 0 || movementY < 0 || movementY > 0) && !musicManager.walkingMusic.isPlaying)
+            musicManager.walkingMusic.PlayOneShot(musicManager.walkingMusic.clip, 1f);
+        if (movementX < 1 && movementX > -1 && movementY < 1 && movementY > -1 && musicManager.walkingMusic.isPlaying)
+            musicManager.walkingMusic.Stop();
 
-        //Mantain player height
-        //this.playerTransform.position = new Vector3(playerTransform.position.x, isInFlashback ? playerHeightFlashback : playerHeightNormal, playerTransform.position.z);
-        this.playerTransform.position = new Vector3(playerTransform.position.x, playerHeightNormal, playerTransform.position.z);
+        Debug.Log(movementX + "xxx " + movementY + "yyy");
+        //else if (!musicManager.walkingMusic.isPlaying)
+        //if ((movementX  0 || movementX > 0 || movementY < 0 || movementY > 0) && !musicManager.walkingMusic.isPlaying)
+            //if (System.Math.Abs(this.movementX) > EPSILON)
+            //{
+            //    this.playerTransform.position += (this.playerTransform.right.normalized * this.walkingSpeed * Time.deltaTime * movementX);
+            //}
+            //if (System.Math.Abs(this.movementY) > EPSILON)
+            //{
+            //    this.playerTransform.position += (this.playerTransform.forward.normalized * this.walkingSpeed * Time.deltaTime * movementY);
+            //}
+
+            //Mantain player height
+            //this.playerTransform.position = new Vector3(playerTransform.position.x, isInFlashback ? playerHeightFlashback : playerHeightNormal, playerTransform.position.z);
+            this.playerTransform.position = new Vector3(playerTransform.position.x, playerHeightNormal, playerTransform.position.z);
     }
 
     private void UpdateRotation() {

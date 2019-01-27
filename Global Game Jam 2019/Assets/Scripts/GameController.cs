@@ -22,15 +22,11 @@ public class GameController : MonoBehaviour
     private Transform playerTransform;
     //public GameObject flashbackCocina;
 
-    public Text title;
-    public Text spaceContinue;
-    public Text instructionsText;
-    public Text instructions;
-    public Image titleBackground;
-    public Text gameOverTitle;
-    public Text gameOverPhrase;
-    public Text creditsTitle;
-    public Text credits;
+    public Text SpaceContinue;
+    public GameObject Instructions;
+    public GameObject Menu;
+    public GameObject gameOver;
+    public GameObject Credits;
     public GameObject playthroughItems;
 
     public Image fadingPanel;
@@ -83,7 +79,7 @@ public class GameController : MonoBehaviour
         this.isMenuSet = true;
 
         musicManager.normalMusic.Play();
-        musicManager.normalMusic.volume = 0.9f;
+        musicManager.normalMusic.volume = 0.5f;
     }
 
     // Update is called once per frame
@@ -101,7 +97,7 @@ public class GameController : MonoBehaviour
                 } else if (isInstructionSet)
                 {
                     this.SetUpInstructions(false);
-                    musicManager.normalMusic.volume = 0.7f;
+                    musicManager.normalMusic.volume = 0.25f;
                     playerController.isAlive = true;
                     playthroughItems.SetActive(true);
                 } else if (isMenuSet)
@@ -140,28 +136,25 @@ public class GameController : MonoBehaviour
     //True is active, false is inactive
     private void SetUpMenu(bool state)
     {
-        title.gameObject.SetActive(state);
-        spaceContinue.gameObject.SetActive(state);
-        titleBackground.gameObject.SetActive(state);
+        SpaceContinue.gameObject.SetActive(state);
+        Menu.SetActive(state);
     }
 
     private void SetUpInstructions(bool state)
     {
-        spaceContinue.gameObject.SetActive(state);
-        instructions.gameObject.SetActive(state);
+        SpaceContinue.gameObject.SetActive(state);
+        Instructions.SetActive(state);
     }
 
     private void SetUpGameOver(bool state)
     {
-        gameOverTitle.gameObject.SetActive(state);
-        spaceContinue.gameObject.SetActive(state);
-        gameOverPhrase.gameObject.SetActive(state);
+        gameOver.SetActive(state);
+        SpaceContinue.gameObject.SetActive(state);
     }
 
     private void SetUpCredits(bool state)
     {
-        creditsTitle.gameObject.SetActive(state);
-        credits.gameObject.SetActive(state);
+        Credits.SetActive(state);
     }
 
     public void GameOver()
@@ -192,6 +185,7 @@ public class GameController : MonoBehaviour
 
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.5f;
 
                 ScreenFadeInOut();
 
@@ -206,6 +200,7 @@ public class GameController : MonoBehaviour
 
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.5f;
 
                 ScreenFadeInOut();
 
@@ -222,6 +217,7 @@ public class GameController : MonoBehaviour
 
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.5f;
 
                 ScreenFadeInOut();
 
@@ -233,8 +229,9 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 //player.transform.localRotation = Quaternion.identity;
 
-                musicManager.normalMusic.volume = 0.7f;
+                musicManager.flashbackMusic.Stop();
                 musicManager.normalMusic.Play();
+                musicManager.normalMusic.volume = 0.25f;
 
                 ScreenFadeInOut();
 

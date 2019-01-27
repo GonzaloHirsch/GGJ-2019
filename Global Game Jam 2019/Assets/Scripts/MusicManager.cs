@@ -12,13 +12,14 @@ public class MusicManager : MonoBehaviour
     public AudioSource television;
     public AudioSource normalMusic;
     public AudioSource flashbackMusic;
+    public AudioSource walkingMusic;
 
-    public AudioClip normal;
-    public AudioClip flashback;
+    //public AudioClip normal;
+    //public AudioClip flashback;
 
-    private void Awake()
-    {
-        normalMusic.clip = normal;
-        flashbackMusic.clip = flashback;
-    }
+    //private void Awake()
+    //{
+    //    normalMusic.clip = normal;
+    //    flashbackMusic.clip = flashback;
+    //}
 }
