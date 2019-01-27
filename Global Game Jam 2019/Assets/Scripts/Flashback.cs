@@ -9,23 +9,24 @@ public class Flashback : MonoBehaviour
     public int flashBackId;
     public GameObject[] flashbackObjects;
     public InteractableItemFlashback[] interactObjectsComponents;
-    public MeshRenderer[] interactObjMaterials, oldMeshRenderers;
+    public MeshRenderer[] interactObjMaterials;
+    public Material[] oldMaterials;
 
     private int flashbackObjIndex;
 
     public void SetUpFlashback() {
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
         interactObjMaterials = new MeshRenderer[flashbackObjects.Length];
-        oldMeshRenderers = new MeshRenderer[flashbackObjects.Length];
+        oldMaterials = new Material[flashbackObjects.Length];
         for (int i = 0; i < flashbackObjects.Length; i++) {
             interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemFlashback>();
             interactObjMaterials[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
-            if( i != 0) {
+            oldMaterials[i] = flashbackObjects[i].GetComponent<MeshRenderer>().material;
+            if ( i != 0) {
                 interactObjectsComponents[i].enabled = false;
             } else {
                 interactObjMaterials[i].material = outlineMaterial;
             }
-            oldMeshRenderers[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
         }
         flashbackObjIndex = 0;
         //acá trabar la salida
@@ -34,8 +35,8 @@ public class Flashback : MonoBehaviour
     public void nextStep() {
         //cambiar mi material
         //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
-        interactObjMaterials[flashbackObjIndex].material = oldMeshRenderers[flashbackObjIndex].material;
-        //deshabilitar mi interración
+        interactObjMaterials[flashbackObjIndex].material = oldMaterials[flashbackObjIndex];
+        //deshabilitar mi interacción
         Destroy(interactObjectsComponents[flashbackObjIndex]);
         //interactObjectsComponents[flashbackObjIndex].enabled = false;
         //habilitar la interacción del siguiente obj
