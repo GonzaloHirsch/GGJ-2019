@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
                 plantHolder.GetComponent<AudioSource>().Stop();
                 //plantHolder.GetComponent<AudioSource>().volume = 1f;
             }
+            hasSecret = !hasSecret;
         }
         else
         {
