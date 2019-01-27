@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: CustomMotionVectorDebugProfile
+  m_Name: ColorCorrection
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -43,8 +43,8 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1.87
-      radius: 0.5
+      intensity: 1
+      radius: 0.3
       sampleCount: 10
       downsampling: 1
       forceForwardCompatibility: 0
@@ -122,9 +122,9 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: 20
+        temperature: 43
         tint: 0
-        hueShift: 0
+        hueShift: 12
         saturation: 0.27
         contrast: 1
       channelMixer:
@@ -311,14 +311,14 @@ MonoBehaviour:
       spectralTexture: {fileID: 0}
       intensity: 0.048
   grain:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       colored: 0
       intensity: 0.27
       size: 0.84
       luminanceContribution: 0.2
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 0
       color: {r: 0.35686275, g: 0.13598174, b: 0.07843137, a: 1}

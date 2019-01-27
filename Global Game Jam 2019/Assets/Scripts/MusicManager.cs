@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
@@ -14,4 +12,13 @@ public class MusicManager : MonoBehaviour
     public AudioSource television;
     public AudioSource normalMusic;
     public AudioSource flashbackMusic;
+
+    public AudioClip normal;
+    public AudioClip flashback;
+
+    private void Awake()
+    {
+        normalMusic.clip = normal;
+        flashbackMusic.clip = flashback;
+    }
 }

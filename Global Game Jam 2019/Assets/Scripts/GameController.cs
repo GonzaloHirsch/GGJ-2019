@@ -1,27 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.PostProcessing;
+using UnityEngine.UI;
+using DG.Tweening;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
     [HideInInspector]
     public bool isFlashback = false;
     //Distance to the alternate model
-    public float distanceToFlashbackModel = 32f;
+    //public float distanceToFlashbackModel = 32f;
     public GameObject[] flashbacksGameObjects;
-    public Flashback[] flashbacks;
-    public Flashback currentFlashBack;
-    private int flashbackIndex;
-
     public GameObject player;
     public Camera camera;
 
+    private Flashback[] flashbacks;
+    private int flashbackIndex;
+    private Flashback currentFlashBack;
+
     private PlayerController playerController;
     private Transform playerTransform;
-    public GameObject flashbackCocina;
+    //public GameObject flashbackCocina;
 
-    public MusicManager musicManager;
+    public Text title;
+    public Text spaceContinue;
+    public Text instructionsText;
+    public Text instructions;
+    public Image titleBackground;
+    public Text gameOverTitle;
+    public Text gameOverPhrase;
+    public Text creditsTitle;
+    public Text credits;
+    public GameObject playthroughItems;
+
+    public Image fadingPanel;
+
+    public GameObject musicManagerObject;
+    private MusicManager musicManager;
 
     //Singleton management
     private GameController instance;
@@ -51,6 +66,9 @@ public class GameController : MonoBehaviour
         this.playerTransform = player.transform;
         this.playerController = player.GetComponent<PlayerController>();
 
+        //Cache music manager
+        this.musicManager = musicManagerObject.GetComponent<MusicManager>();
+
         //cahce flashback data
         flashbacks = new Flashback[flashbacksGameObjects.Length];
         for (int i = 0; i < flashbacksGameObjects.Length; i++)
@@ -62,8 +80,8 @@ public class GameController : MonoBehaviour
         SetUpMenu(true);
         this.isMenuSet = true;
 
-        musicManager.normalMusic.volume = 0.9f;
         musicManager.normalMusic.Play();
+        musicManager.normalMusic.volume = 0.9f;
     }
 
     // Update is called once per frame
@@ -73,25 +91,42 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (isMenuSet && !isInstructionSet)
-                {
-                    this.SetUpMenu(false);
-                    this.SetUpInstructions(true);
-                    isInstructionSet = true;
-                } else if (isInstructionSet)
-                {
-                    this.SetUpInstructions(false);
-
-                    musicManager.normalMusic.volume = 0.7f;
-                    //musicManager.normalMusic.Play();
-
-                    playerController.isAlive = true;
-                } else if (isGameOverSet && !isCreditsSet)
+                if (isGameOverSet)
                 {
                     SetUpGameOver(false);
                     SetUpCredits(true);
                     isCreditsSet = true;
+                } else if (isInstructionSet)
+                {
+                    this.SetUpInstructions(false);
+                    musicManager.normalMusic.volume = 0.7f;
+                    playerController.isAlive = true;
+                    playthroughItems.SetActive(true);
+                } else if (isMenuSet)
+                {
+                    this.SetUpMenu(false);
+                    this.SetUpInstructions(true);
+                    isInstructionSet = true;
                 }
+                //if (isMenuSet && !isInstructionSet)
+                //{
+                //    this.SetUpMenu(false);
+                //    this.SetUpInstructions(true);
+                //    isInstructionSet = true;
+                //} else if (isInstructionSet)
+                //{
+                //    this.SetUpInstructions(false);
+
+                //    musicManager.normalMusic.volume = 0.7f;
+                //    //musicManager.normalMusic.Play();
+
+                //    playerController.isAlive = true;
+                //} else if (isGameOverSet && !isCreditsSet)
+                //{
+                //    SetUpGameOver(false);
+                //    SetUpCredits(true);
+                //    isCreditsSet = true;
+                //}
             }
         }
     }
@@ -99,77 +134,85 @@ public class GameController : MonoBehaviour
     //True is active, false is inactive
     private void SetUpMenu(bool state)
     {
-        //TODO ver UI
+        title.gameObject.SetActive(state);
+        spaceContinue.gameObject.SetActive(state);
+        titleBackground.gameObject.SetActive(state);
     }
 
     private void SetUpInstructions(bool state)
     {
-        //TODO ver UI
+        spaceContinue.gameObject.SetActive(state);
+        instructions.gameObject.SetActive(state);
     }
 
     private void SetUpGameOver(bool state)
     {
-        //TODO ver UI
+        gameOverTitle.gameObject.SetActive(state);
+        spaceContinue.gameObject.SetActive(state);
+        gameOverPhrase.gameObject.SetActive(state);
     }
 
     private void SetUpCredits(bool state)
     {
-        //TODO ver UI
+        creditsTitle.gameObject.SetActive(state);
+        credits.gameObject.SetActive(state);
     }
 
     public void GameOver()
     {
+        playthroughItems.SetActive(true);
         playerController.isAlive = false;
         SetUpGameOver(true);
         isGameOverSet = true;
     }
 
-    //TODO: Hacer que renderee y desrenderee el modelo que no se esta usando
     public void MovePlayer(int mode = 0)
     {
         switch (mode)
         {
-            //Go to flashback cocina
-            case 4:
-                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
-                player.GetComponent<PlayerController>().isInFlashback = true;
-                //player.transform.localRotation = Quaternion.identity;
+            //case 4:
+                ////player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                //player.GetComponent<PlayerController>().isInFlashback = true;
+                ////player.transform.localRotation = Quaternion.identity;
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
-                //flashbackCocina.SetUpFlashback();
-                break;
-            //Go to flashback cocina
+                ////flashbackCocina.SetUpFlashback();
+                //break;
             case 3:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
 
+                ScreenFadeInOut();
+
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
-                //flashbackCocina.SetUpFlashback();
+                flashbacks[2].SetUpFlashback();
                 break;
-            //Go to flashback cocina
             case 2:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
 
+                ScreenFadeInOut();
+
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
-                //flashbackCocina.SetUpFlashback();
+                flashbacks[1].SetUpFlashback();
                 break;
-            //Go to flashback cocina
             case 1:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
-                
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
                 Destroy(flashbacks[0].GetComponent<BoxCollider>());
 
-                musicManager.flashbackMusic.Play();
+                //musicManager.flashbackMusic.Play();
+
+                ScreenFadeInOut();
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
                 flashbacks[0].SetUpFlashback();
                 break;
@@ -177,8 +220,10 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 //player.transform.localRotation = Quaternion.identity;
 
-                musicManager.normalMusic.volume = 0.7f;
-                musicManager.normalMusic.Play();
+                //musicManager.normalMusic.volume = 0.7f;
+                //musicManager.normalMusic.Play();
+
+                ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = false;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
@@ -188,5 +233,26 @@ public class GameController : MonoBehaviour
 
     public Flashback getCurrentFlashBack() {
         return flashbacks[flashbackIndex];
+    }
+
+    private void ScreenFadeInOut()
+    {
+        fadingPanel.gameObject.SetActive(true);
+        //DG.Tweening.DOTweenModuleUI.DOFade(fadingPanel, 1, 10);
+        StartCoroutine(FadingIn());
+    }
+
+    IEnumerator FadingIn()
+    {
+        DG.Tweening.DOTweenModuleUI.DOFade(fadingPanel, 1, 1);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(FadingOut());
+    }
+
+    IEnumerator FadingOut()
+    {
+        DG.Tweening.DOTweenModuleUI.DOFade(fadingPanel, 0, 1);
+        yield return new WaitForSeconds(1f);
+        fadingPanel.gameObject.SetActive(false);
     }
 }
