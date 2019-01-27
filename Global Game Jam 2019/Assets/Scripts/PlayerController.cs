@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isAlive = false;
+
     public float walkingSpeed = 10f;
     public float playerHeightNormal = 1.9f;
     public float playerHeightFlashback = 5f;
@@ -40,18 +42,21 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        UpdateMovement();
-        UpdateRotation();
-        this.itemToInteract = CheckIfInteractable();
-        this.doorToRotate = CheckIfDoor();
+        if (isAlive)
+        {
+            UpdateMovement();
+            UpdateRotation();
+            this.itemToInteract = CheckIfInteractable();
+            this.doorToRotate = CheckIfDoor();
 
-        if (itemToInteract != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
-        {
-            this.itemToInteract.Interact();
-        }
-        if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
-        {
-            this.doorToRotate.interacted = true;
+            if (itemToInteract != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                this.itemToInteract.Interact();
+            }
+            if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                this.doorToRotate.interacted = true;
+            }
         }
     }
 
