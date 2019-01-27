@@ -14,7 +14,7 @@ public class MiniPlants : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         time += 0.25f;
         transform.Rotate(new Vector3(0,0,(Mathf.Sin(time) * 35f) - 15f));
