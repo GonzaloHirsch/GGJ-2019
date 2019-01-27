@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     private InteractableItem itemToInteract;
     private DoorRotator doorToRotate;
 
-    
+    public GameObject gamecontroller;
+
     void Start()
     {
         this.playerTransform = gameObject.transform;
@@ -50,6 +51,13 @@ public class PlayerController : MonoBehaviour
         {
             this.doorToRotate.interacted = true;
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        //int id = other.gameObject.GetComponent<Flashback>();
+        gamecontroller.GetComponent<GameController>().MovePlayer();
+
     }
 
     //PLayer movement
@@ -130,12 +138,12 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, playerTransform.forward, out hit, interactDistance);
         DoorRotator collision = null;
-        Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
+        //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
             collision = hit.collider.gameObject.GetComponent<DoorRotator>();
         }
-        Debug.Log(hit.collider.gameObject);
+        //Debug.Log(hit.collider.gameObject);
         return collision;
     }
 }
