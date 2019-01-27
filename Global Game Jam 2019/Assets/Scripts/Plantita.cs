@@ -5,7 +5,7 @@ using UnityEngine;
 public class Plantita : InteractableItem
 {
     public GameObject player;
-    public float speed = 1.5f;
+    public float speed = 3f;
     public AudioSource source;
 
     private bool isAlive = false;

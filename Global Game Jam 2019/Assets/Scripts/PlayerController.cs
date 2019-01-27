@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject raycastOut;
 
-    public float maxAngle = 40;
+    public float maxAngle = 45;
+
+    private bool hasSecret = false;
 
     private float movementX = 0f;
     private float movementY = 0f;
@@ -69,9 +71,19 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Secret Room")
         {
-            plantHolder.SetActive(true);
-            plantHolder.GetComponent<AudioSource>().Play();
-            plantHolder.GetComponent<AudioSource>().volume = 1f;
+            if (!hasSecret)
+            {
+                plantHolder.SetActive(true);
+                plantHolder.GetComponent<AudioSource>().Play();
+                plantHolder.GetComponent<AudioSource>().volume = 1f;
+            }
+            else
+            {
+                plantHolder.SetActive(false);
+                plantHolder.GetComponent<AudioSource>().Stop();
+                //plantHolder.GetComponent<AudioSource>().volume = 1f;
+            }
+            hasSecret = !hasSecret;
         }
         else
         {
@@ -100,7 +112,7 @@ public class PlayerController : MonoBehaviour
         if (movementX < 1 && movementX > -1 && movementY < 1 && movementY > -1 && musicManager.walkingMusic.isPlaying)
             musicManager.walkingMusic.Stop();
 
-        Debug.Log(movementX + "xxx " + movementY + "yyy");
+        //Debug.Log(movementX + "xxx " + movementY + "yyy");
         //else if (!musicManager.walkingMusic.isPlaying)
         //if ((movementX  0 || movementX > 0 || movementY < 0 || movementY > 0) && !musicManager.walkingMusic.isPlaying)
             //if (System.Math.Abs(this.movementX) > EPSILON)
