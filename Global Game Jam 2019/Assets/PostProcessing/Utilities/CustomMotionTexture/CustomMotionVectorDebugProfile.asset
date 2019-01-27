@@ -306,10 +306,10 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.048
+      intensity: 0.531
   grain:
     m_Enabled: 1
     m_Settings:
