@@ -119,13 +119,13 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
-        InteractableItem collision = null;
+        InteractableItem component = null;
         //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
-            collision = hit.collider.gameObject.GetComponent<InteractableItem>();
+            component = hit.collider.gameObject.GetComponent<InteractableItem>();
             
-            if (collision != null) {
+            if (component != null && component.enabled) {
                 eInteractText.gameObject.SetActive(true);
             } else {
                 eInteractText.gameObject.SetActive(false);
@@ -133,20 +133,20 @@ public class PlayerController : MonoBehaviour
         }else {
             eInteractText.gameObject.SetActive(false);
         }
-        return collision;
+        return component;
     }
 
     private DoorRotator CheckIfDoor()
     {
         RaycastHit hit;
         Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
-        DoorRotator collision = null;
+        DoorRotator component = null;
         Debug.DrawRay(raycastOut.transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
-            collision = hit.collider.gameObject.GetComponent<DoorRotator>();
+            component = hit.collider.gameObject.GetComponent<DoorRotator>();
         }
         //Debug.Log(hit.collider.gameObject);
-        return collision;
+        return component;
     }
 }

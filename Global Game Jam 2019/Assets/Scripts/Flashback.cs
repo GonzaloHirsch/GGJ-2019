@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Flashback : MonoBehaviour
 {
+    public GameObject door;
+    private DoorRotator rotator;
+
     public Material outlineMaterial;
 
     public int flashBackId;
@@ -14,6 +17,14 @@ public class Flashback : MonoBehaviour
     private int flashbackObjIndex;
 
     public void SetUpFlashback() {
+        this.rotator = door.GetComponent<DoorRotator>();
+        if (rotator.isOpen)
+        {
+            //Cierra la puerta
+            rotator.OpenDoor();
+        }
+        rotator.canOpen = false;
+
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
         interactObjMaterials = new MeshRenderer[flashbackObjects.Length];
         oldMeshRenderers = new MeshRenderer[flashbackObjects.Length];
@@ -43,6 +54,9 @@ public class Flashback : MonoBehaviour
         if (flashbackObjIndex + 1 >= interactObjMaterials.Length)
         {
             GameObject.FindWithTag("GameController").GetComponent<GameController>().MovePlayer(0);
+
+            rotator.canOpen = true;
+            rotator.OpenDoor();
         }
         else
         {
