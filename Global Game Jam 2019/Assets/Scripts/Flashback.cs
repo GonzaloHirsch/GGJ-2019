@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Flashback : MonoBehaviour
+public class Flashback : MonoBehaviour
 {
     public Material outlineMaterial;
 
     public int flashBackId;
     public GameObject[] flashbackObjects;
-    public InteractableItemText[] interactObjectsComponents;
+    public InteractableItemFlashback[] interactObjectsComponents;
     public MeshRenderer[] interactObjMaterials, oldMeshRenderers;
 
     private int flashbackObjIndex;
 
     public void SetUpFlashback() {
-        interactObjectsComponents = new InteractableItemText[flashbackObjects.Length];
-        for(int i = 0; i < flashbackObjects.Length; i++) {
-            interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemText>();
+        interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
+        interactObjMaterials = new MeshRenderer[flashbackObjects.Length];
+        oldMeshRenderers = new MeshRenderer[flashbackObjects.Length];
+        for (int i = 0; i < flashbackObjects.Length; i++) {
+            interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemFlashback>();
             interactObjMaterials[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
             if( i != 0) {
                 interactObjectsComponents[i].enabled = false;
-            }else {
+            } else {
                 interactObjMaterials[i].material = outlineMaterial;
             }
             oldMeshRenderers[i] = flashbackObjects[i].GetComponent<MeshRenderer>();
@@ -31,13 +33,22 @@ public abstract class Flashback : MonoBehaviour
 
     public void nextStep() {
         //cambiar mi material
-        interactObjMaterials[flashbackObjIndex] = oldMeshRenderers[flashbackObjIndex];
+        //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
+        interactObjMaterials[flashbackObjIndex].material = oldMeshRenderers[flashbackObjIndex].material;
         //deshabilitar mi interración
-        interactObjectsComponents[flashbackObjIndex].enabled = false;
+        Destroy(interactObjectsComponents[flashbackObjIndex]);
+        //interactObjectsComponents[flashbackObjIndex].enabled = false;
         //habilitar la interacción del siguiente obj
-        interactObjectsComponents[flashbackObjIndex + 1].enabled = true;
         //cambiar el material
-        interactObjMaterials[flashbackObjIndex++].material = outlineMaterial;
+        if (flashbackObjIndex + 1 >= interactObjMaterials.Length)
+        {
+            GameObject.FindWithTag("GameController").GetComponent<GameController>().MovePlayer(0);
+        }
+        else
+        {
+            interactObjectsComponents[flashbackObjIndex + 1].enabled = true;
+            interactObjMaterials[++flashbackObjIndex].material = outlineMaterial;
+        }
     }
 
 }

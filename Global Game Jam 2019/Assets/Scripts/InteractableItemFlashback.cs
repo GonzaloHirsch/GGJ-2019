@@ -28,23 +28,23 @@ public class InteractableItemFlashback : InteractableItemText
 
     public override void Interact()
     {
-        switch (mode)
-        {
-            case 1:
-                text = flashbackText;
-                break;
-            case 0:
-                text = textToShow;
-                break;
-        }
+        //switch (mode)
+        //{
+        //    case 1:
+        //        text = flashbackText;
+        //        break;
+        //    case 0:
+        //        text = textToShow;
+        //        break;
+        //}
         StartCoroutine(WaitforText());
-        gameController.GetComponent<GameController>().getCurrentFlashBack().nextStep();
     }
 
     private void GoToFlashback()
     {
-        this.gameController.GetComponent<GameController>().MovePlayer(mode);
-        mode = 1 - mode;
+        gameController.GetComponent<GameController>().getCurrentFlashBack().nextStep();
+        //this.gameController.GetComponent<GameController>().MovePlayer(mode);
+        //mode = 1 - mode;
     }
 
     public override IEnumerator WaitforText()

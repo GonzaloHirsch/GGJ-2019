@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     public float playerHeightFlashback = 5f;
     public Camera camera;
     public GameObject crosshair;
-    public float interactDistance = 5f;
+    public float interactDistance = 30f;
     public Text eInteractText;
     public float mouseSensitivity = 1;
     public bool isInFlashback = false;
-    
+
+    public GameObject raycastOut;
+
     public float maxAngle = 30;
 
     private float movementX = 0f;
@@ -43,11 +45,11 @@ public class PlayerController : MonoBehaviour
         this.itemToInteract = CheckIfInteractable();
         this.doorToRotate = CheckIfDoor();
 
-        if (itemToInteract != null && Input.GetKeyDown(KeyCode.E))
+        if (itemToInteract != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
         {
             this.itemToInteract.Interact();
         }
-        if (doorToRotate != null && Input.GetKeyDown(KeyCode.E))
+        if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
         {
             this.doorToRotate.interacted = true;
         }
@@ -55,9 +57,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        //int id = other.gameObject.GetComponent<Flashback>();
-        gamecontroller.GetComponent<GameController>().MovePlayer();
-
+        Destroy(other);
+        //Debug.Log("ohlasldfaskdgnsdhfgvjhsdvfgsdf");
+        int id = other.gameObject.GetComponent<Flashback>().flashBackId;
+        gamecontroller.GetComponent<GameController>().MovePlayer(id);
     }
 
     //PLayer movement
@@ -115,7 +118,7 @@ public class PlayerController : MonoBehaviour
     private InteractableItem CheckIfInteractable()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, playerTransform.forward, out hit, interactDistance);
+        Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
         InteractableItem collision = null;
         //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
@@ -136,9 +139,9 @@ public class PlayerController : MonoBehaviour
     private DoorRotator CheckIfDoor()
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, playerTransform.forward, out hit, interactDistance);
+        Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
         DoorRotator collision = null;
-        //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
+        Debug.DrawRay(raycastOut.transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
             collision = hit.collider.gameObject.GetComponent<DoorRotator>();

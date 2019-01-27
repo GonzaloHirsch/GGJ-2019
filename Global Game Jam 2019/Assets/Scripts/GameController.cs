@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public bool isFlashback = false;
     //Distance to the alternate model
     public float distanceToFlashbackModel = 32f;
+    public GameObject[] flashbacksGameObjects;
     public Flashback[] flashbacks;
     public Flashback currentFlashBack;
     private int flashbackIndex;
@@ -38,6 +39,12 @@ public class GameController : MonoBehaviour
         flashbackIndex = 0;
 
         this.playerTransform = player.transform;
+
+        flashbacks = new Flashback[flashbacksGameObjects.Length];
+        for (int i = 0; i < flashbacksGameObjects.Length; i++)
+        {
+            flashbacks[i] = flashbacksGameObjects[i].GetComponent<Flashback>();
+        }
     }
 
     // Update is called once per frame
@@ -89,11 +96,12 @@ public class GameController : MonoBehaviour
                 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
+                Destroy(flashbacks[0].GetComponent<BoxCollider>());
                 flashbacks[0].SetUpFlashback();
                 break;
             case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;
-                player.transform.localRotation = Quaternion.identity;
+                //player.transform.localRotation = Quaternion.identity;
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = false;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
