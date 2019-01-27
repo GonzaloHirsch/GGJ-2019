@@ -10,13 +10,15 @@ public class Plantita : InteractableItem
 
     private bool isAlive = false;
     private bool isMoving = false;
+    private bool canPlay = false;
 
     private PlayerController controller;
     
 
     public override void Interact()
     {
-        isAlive = !isAlive;
+        isAlive = true;
+        canPlay = true;
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
@@ -34,14 +36,18 @@ public class Plantita : InteractableItem
     private void OnBecameVisible()
     {
         isMoving = false;
-        source.Pause();
+        if (canPlay)
+            source.Pause();
     }
 
     private void OnBecameInvisible()
     {
         isMoving = true;
-        source.Play();
-        source.volume = 1f;
+        if (canPlay)
+        {
+            source.Play();
+            source.volume = 1f;
+        }
     }
 
     // Update is called once per frame
