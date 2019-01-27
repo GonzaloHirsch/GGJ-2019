@@ -1,16 +1,18 @@
 fileFormatVersion: 2
-guid: 2ef09f9ac39e04214adad0a572a59ae3
+guid: f05a0b1d0e78d774381deaf2b9de72b4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
-    2100002: Material.013
-    2100004: Material.014
+    2100000: Material.004
+    2100002: Material.005
+    2100004: Material.001
+    2100006: Material.003
+    2100008: Material.002
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MiniLamps
+    4300000: Capsule001
   externalObjects: {}
   materials:
     importMaterials: 1
