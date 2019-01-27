@@ -49,6 +49,9 @@ public class Flashback : MonoBehaviour
         //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
 
         //Cambia al material que tenia antes
+        Debug.Log(flashbackObjects);
+        Debug.Log(interactObjMaterials);
+        Debug.Log(oldMaterials);
         interactObjMaterials[flashbackObjIndex].material = oldMaterials[flashbackObjIndex];
 
         //deshabilitar mi interacción

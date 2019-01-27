@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     //Singleton management
     private GameController instance;
 
+    private int doneFlashbacks = 0;
+
     //UI management
     private bool isMenuSet = false;
     private bool isInstructionSet = false;
@@ -129,6 +131,10 @@ public class GameController : MonoBehaviour
                 //}
             }
         }
+        else
+        {
+            if (doneFlashbacks == 3) { GameOver(); }
+        }
     }
 
     //True is active, false is inactive
@@ -190,7 +196,7 @@ public class GameController : MonoBehaviour
                 ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
-
+                flashbackIndex = 2;
                 flashbacks[2].SetUpFlashback();
                 break;
             case 2:
@@ -204,7 +210,7 @@ public class GameController : MonoBehaviour
                 ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
-
+                flashbackIndex = 1;
                 flashbacks[1].SetUpFlashback();
                 break;
             case 1:
@@ -220,7 +226,7 @@ public class GameController : MonoBehaviour
                 ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
-
+                flashbackIndex = 0;
                 flashbacks[0].SetUpFlashback();
                 break;
             case 0:
@@ -233,6 +239,8 @@ public class GameController : MonoBehaviour
                 ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = false;
+
+                doneFlashbacks++;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 break;
         }
