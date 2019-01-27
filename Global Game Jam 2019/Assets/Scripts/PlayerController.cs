@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -64,10 +64,11 @@ public class PlayerController : MonoBehaviour
             {
                 this.doorToRotate.interacted = true;
             }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene(0); 
-            }
+            //if (Input.GetKeyDown(KeyCode.R))
+            //{
+            //    Application.LoadLevel(Application.loadedLevel);
+            //    //SceneManager.LoadScene(0); 
+            //}
         }
     }
 
