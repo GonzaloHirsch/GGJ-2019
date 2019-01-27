@@ -499,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 140581027}
   m_LocalRotation: {x: -0, y: -0, z: 0.13619031, w: 0.9906827}
   m_LocalPosition: {x: 3.8492432, y: 9.532677, z: -6.260439}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.01}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1965128839}
   m_RootOrder: 1
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   - {fileID: 1733119400}
   interactObjectsComponents: []
   interactObjMaterials: []
-  oldMeshRenderers: []
+  oldMaterials: []
 --- !u!65 &235918374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15933,7 +15933,7 @@ GameObject:
   - component: {fileID: 487568215}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18090,7 +18090,7 @@ MonoBehaviour:
   - {fileID: 1733119400}
   interactObjectsComponents: []
   interactObjMaterials: []
-  oldMeshRenderers: []
+  oldMaterials: []
 --- !u!65 &913430401
 BoxCollider:
   m_ObjectHideFlags: 0
