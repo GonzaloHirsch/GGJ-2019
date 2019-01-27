@@ -71,7 +71,6 @@ public class InteractableItemFlashback : InteractableItemText
         switch (hashedNumber)
         {
             case 18:
-                musicManager.hotWater.Play();
                 break;
             case 24:
                 musicManager.chairMovement.Play();
@@ -85,6 +84,9 @@ public class InteractableItemFlashback : InteractableItemText
                 break;
             case 108:
                 musicManager.television.Play();
+                break;
+            case 162:
+                musicManager.hotWater.Play();
                 break;
             case 729:
                 musicManager.placingGlass.Play();

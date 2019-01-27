@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (doneFlashbacks == 3) { GameOver(); }
+            if (doneFlashbacks == 4) { GameOver(); }
         }
     }
 
@@ -174,15 +174,20 @@ public class GameController : MonoBehaviour
     {
         switch (mode)
         {
-            //case 4:
-                ////player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
-                //player.GetComponent<PlayerController>().isInFlashback = true;
-                ////player.transform.localRotation = Quaternion.identity;
+            case 4:
+                //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
+                player.GetComponent<PlayerController>().isInFlashback = true;
+                //player.transform.localRotation = Quaternion.identity;
 
-                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                StartCoroutine(FadeMusic(musicManager.normalMusic, musicManager.flashbackMusic, 0.5f));
 
-                ////flashbackCocina.SetUpFlashback();
-                //break;
+                ScreenFadeInOut();
+
+                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                flashbackIndex = 3;
+                flashbacks[3].SetUpFlashback();
+                //flashbackCocina.SetUpFlashback();
+                break;
             case 3:
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
