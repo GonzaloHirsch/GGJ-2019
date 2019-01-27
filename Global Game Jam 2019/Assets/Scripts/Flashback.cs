@@ -65,5 +65,4 @@ public class Flashback : MonoBehaviour
             interactObjMaterials[++flashbackObjIndex].material = outlineMaterial;
         }
     }
-
 }

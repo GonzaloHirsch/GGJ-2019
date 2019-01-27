@@ -20,9 +20,13 @@ public class GameController : MonoBehaviour
     private PlayerController playerController;
     private Transform playerTransform;
     public GameObject flashbackCocina;
-    
 
+    public MusicManager musicManager;
+
+    //Singleton management
     private GameController instance;
+
+    //UI management
     private bool isMenuSet = false;
     private bool isInstructionSet = false;
     private bool isGameOverSet = false;
@@ -57,6 +61,9 @@ public class GameController : MonoBehaviour
         //menu setup
         SetUpMenu(true);
         this.isMenuSet = true;
+
+        musicManager.normalMusic.volume = 0.9f;
+        musicManager.normalMusic.Play();
     }
 
     // Update is called once per frame
@@ -74,6 +81,10 @@ public class GameController : MonoBehaviour
                 } else if (isInstructionSet)
                 {
                     this.SetUpInstructions(false);
+
+                    musicManager.normalMusic.volume = 0.7f;
+                    //musicManager.normalMusic.Play();
+
                     playerController.isAlive = true;
                 } else if (isGameOverSet && !isCreditsSet)
                 {
@@ -157,11 +168,17 @@ public class GameController : MonoBehaviour
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
 
                 Destroy(flashbacks[0].GetComponent<BoxCollider>());
+
+                musicManager.flashbackMusic.Play();
+
                 flashbacks[0].SetUpFlashback();
                 break;
             case 0:
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 //player.transform.localRotation = Quaternion.identity;
+
+                musicManager.normalMusic.volume = 0.7f;
+                musicManager.normalMusic.Play();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = false;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
