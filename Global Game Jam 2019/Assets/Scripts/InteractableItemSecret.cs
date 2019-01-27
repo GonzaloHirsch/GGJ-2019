@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InteractableItemSecret : InteractableItem
 {
-    public GameObject target;
 
     public override void Interact() {
         DG.Tweening.DOTweenModulePhysics.DOMoveX(gameObject.GetComponent<Rigidbody>(), -5f, 3f);

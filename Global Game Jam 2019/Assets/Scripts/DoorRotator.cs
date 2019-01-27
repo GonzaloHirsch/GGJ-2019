@@ -9,7 +9,7 @@ public class DoorRotator : MonoBehaviour
     public bool canOpen = true;
     public bool isOpen = false;
     public bool interacted = false;
-    private float timeToOpen = 1.5f;
+    private float timeToOpen = 2f;
     private float timeOpening = 0f;
 
     private Quaternion oldRotation;

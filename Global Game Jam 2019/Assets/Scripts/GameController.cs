@@ -31,6 +31,9 @@ public class GameController : MonoBehaviour
 
     public Image fadingPanel;
 
+    public Light fireplace;
+    private float time = 0f;
+
     public GameObject musicManagerObject;
     private MusicManager musicManager;
 
@@ -60,6 +63,8 @@ public class GameController : MonoBehaviour
         Cursor.visible = false;
         flashbackIndex = 0;
 
+        
+
         //cache player data
         this.playerTransform = player.transform;
         this.playerController = player.GetComponent<PlayerController>();
@@ -85,6 +90,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time += 0.1f;
+        fireplace.intensity = Mathf.Abs(Mathf.Sin(time) + 4f);
+
         if (!playerController.isAlive)
         {
             if (Input.GetKeyDown(KeyCode.Space))

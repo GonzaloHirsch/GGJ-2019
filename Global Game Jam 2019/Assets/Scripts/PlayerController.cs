@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             plantHolder.SetActive(true);
             plantHolder.GetComponent<AudioSource>().Play();
+            plantHolder.GetComponent<AudioSource>().volume = 1f;
         }
         else
         {
