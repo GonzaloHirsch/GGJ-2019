@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -39,14 +40,13 @@ public class PlayerController : MonoBehaviour
 
     public GameObject musicManagerObject;
     private MusicManager musicManager;
-
+    
     void Start()
     {
         this.playerTransform = gameObject.transform;
         this.musicManager = musicManagerObject.GetComponent<MusicManager>();
     }
 
-    
     void Update()
     {
         if (isAlive)
@@ -63,6 +63,10 @@ public class PlayerController : MonoBehaviour
             if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
             {
                 this.doorToRotate.interacted = true;
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0); 
             }
         }
     }
