@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public bool isAlive = false;
+
+    public GameObject plantHolder;
 
     public float walkingSpeed = 10f;
     public float playerHeightNormal = 2f;
@@ -65,14 +67,22 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other);
-        //Debug.Log("ohlasldfaskdgnsdhfgvjhsdvfgsdf");
-        int id = other.gameObject.GetComponent<Flashback>().flashBackId;
+        if (other.gameObject.tag == "Secret Room")
+        {
+            plantHolder.SetActive(true);
+            plantHolder.GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            //Debug.Log(other);
+            //Debug.Log("ohlasldfaskdgnsdhfgvjhsdvfgsdf");
+            int id = other.gameObject.GetComponent<Flashback>().flashBackId;
 
+            Destroy(other);
 
-        Destroy(other);
+            gamecontroller.GetComponent<GameController>().MovePlayer(id);
+        }
 
-        gamecontroller.GetComponent<GameController>().MovePlayer(id);
     }
 
     //PLayer movement
