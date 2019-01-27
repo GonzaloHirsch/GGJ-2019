@@ -31,6 +31,9 @@ public class GameController : MonoBehaviour
 
     public Image fadingPanel;
 
+    public PostProcessingProfile flashbackPP;
+    public PostProcessingProfile normalPP;
+
     public Light fireplace;
     private float time = 0f;
 
@@ -178,6 +181,11 @@ public class GameController : MonoBehaviour
         isGameOverSet = true;
     }
 
+    private void SwitchPP(PostProcessingProfile newProfile)
+    {
+        camera.GetComponent<PostProcessingBehaviour>().profile = newProfile;
+    }
+
     public void MovePlayer(int mode = 0)
     {
         switch (mode)
@@ -191,7 +199,8 @@ public class GameController : MonoBehaviour
 
                 ScreenFadeInOut();
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                SwitchPP(flashbackPP);
                 flashbackIndex = 3;
                 flashbacks[3].SetUpFlashback();
                 //flashbackCocina.SetUpFlashback();
@@ -208,7 +217,8 @@ public class GameController : MonoBehaviour
 
                 ScreenFadeInOut();
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                SwitchPP(flashbackPP);
                 flashbackIndex = 2;
                 flashbacks[2].SetUpFlashback();
                 break;
@@ -224,7 +234,8 @@ public class GameController : MonoBehaviour
 
                 ScreenFadeInOut();
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                SwitchPP(flashbackPP);
                 flashbackIndex = 1;
                 flashbacks[1].SetUpFlashback();
                 break;
@@ -242,7 +253,8 @@ public class GameController : MonoBehaviour
 
                 ScreenFadeInOut();
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = true;
+                SwitchPP(flashbackPP);
                 flashbackIndex = 0;
                 flashbacks[0].SetUpFlashback();
                 break;
@@ -258,7 +270,8 @@ public class GameController : MonoBehaviour
 
                 ScreenFadeInOut();
 
-                camera.GetComponent<PostProcessingBehaviour>().enabled = false;
+                //camera.GetComponent<PostProcessingBehaviour>().enabled = false;
+                SwitchPP(normalPP);
 
                 doneFlashbacks++;
                 //player.transform.position = new Vector3(playerTransform.position.x - distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
