@@ -53,7 +53,7 @@ public class DoorRotator : MonoBehaviour
             //door.transform.localRotation = Quaternion.Slerp(hinge.transform.localRotation, Quaternion.Euler(0, -90, 0), 0.1f);
             //timeOpening += Time.deltaTime;
 
-            hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, 90, 0), 0.1f);
+            hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, 90, 0), 0.05f);
             timeOpening += Time.deltaTime;
             //}
             //musicManager.doorMovement.Play();
@@ -61,7 +61,7 @@ public class DoorRotator : MonoBehaviour
         else
         {
             //door.transform.localRotation = Quaternion.Slerp(hinge.transform.localRotation, oldRotation, 0.1f);
-            hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, oldRotation, 0.1f);
+            hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, oldRotation, 0.05f);
             timeOpening += Time.deltaTime;
         }
         //Una vez que termino de abrirse, cambia las variables
