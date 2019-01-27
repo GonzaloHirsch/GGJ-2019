@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject raycastOut;
 
-    public float maxAngle = 40;
+    public float maxAngle = 45;
 
     private bool hasSecret = false;
 
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         if (movementX < 1 && movementX > -1 && movementY < 1 && movementY > -1 && musicManager.walkingMusic.isPlaying)
             musicManager.walkingMusic.Stop();
 
-        Debug.Log(movementX + "xxx " + movementY + "yyy");
+        //Debug.Log(movementX + "xxx " + movementY + "yyy");
         //else if (!musicManager.walkingMusic.isPlaying)
         //if ((movementX  0 || movementX > 0 || movementY < 0 || movementY > 0) && !musicManager.walkingMusic.isPlaying)
             //if (System.Math.Abs(this.movementX) > EPSILON)
