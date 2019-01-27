@@ -25605,7 +25605,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Game Over
+  m_Text: The End
 --- !u!222 &642369248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -46041,8 +46041,6 @@ MonoBehaviour:
   m_Text: 'WASD / Arrow Keys to move
 
     E  to interact
-
-    R  to restart
 
     Mouse to look around'
 --- !u!222 &1766829183

@@ -66,8 +66,8 @@ public class PlayerController : MonoBehaviour
             }
             //if (Input.GetKeyDown(KeyCode.R))
             //{
-            //    Application.LoadLevel(Application.loadedLevel);
-            //    //SceneManager.LoadScene(0); 
+            //    //Application.LoadLevel(Application.loadedLevel);
+            //    SceneManager.LoadScene(0); 
             //}
         }
     }
