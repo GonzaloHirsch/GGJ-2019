@@ -81,6 +81,7 @@ public class GameController : MonoBehaviour
         //menu setup
         SetUpMenu(true);
         this.isMenuSet = true;
+        playthroughItems.SetActive(false);
 
         musicManager.normalMusic.Play();
         musicManager.normalMusic.volume = 0.9f;
@@ -190,8 +191,11 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
 
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.normalMusic, 0, 1f);
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.7f;
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.flashbackMusic, 1, 1f);
 
                 ScreenFadeInOut();
 
@@ -204,8 +208,11 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
 
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.normalMusic, 0, 1f);
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.7f;
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.flashbackMusic, 1, 1f);
 
                 ScreenFadeInOut();
 
@@ -220,8 +227,11 @@ public class GameController : MonoBehaviour
 
                 Destroy(flashbacks[0].GetComponent<BoxCollider>());
 
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.normalMusic, 0, 1f);
                 musicManager.normalMusic.Pause();
                 musicManager.flashbackMusic.Play();
+                musicManager.flashbackMusic.volume = 0.7f;
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.flashbackMusic, 1, 1f);
 
                 ScreenFadeInOut();
 
@@ -233,8 +243,11 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 //player.transform.localRotation = Quaternion.identity;
 
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.flashbackMusic, 0, 1f);
+                musicManager.flashbackMusic.Stop();
                 musicManager.normalMusic.volume = 0.7f;
                 musicManager.normalMusic.Play();
+                DG.Tweening.DOTweenModuleAudio.DOFade(musicManager.normalMusic, 1, 1f);
 
                 ScreenFadeInOut();
 
