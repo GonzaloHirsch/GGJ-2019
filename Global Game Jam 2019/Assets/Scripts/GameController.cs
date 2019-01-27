@@ -184,6 +184,9 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
 
+                musicManager.normalMusic.Pause();
+                musicManager.flashbackMusic.Play();
+
                 ScreenFadeInOut();
 
                 camera.GetComponent<PostProcessingBehaviour>().enabled = true;
@@ -194,6 +197,9 @@ public class GameController : MonoBehaviour
                 //player.transform.position = new Vector3(playerTransform.position.x + distanceToFlashbackModel, playerTransform.position.y, playerTransform.position.z);
                 player.GetComponent<PlayerController>().isInFlashback = true;
                 //player.transform.localRotation = Quaternion.identity;
+
+                musicManager.normalMusic.Pause();
+                musicManager.flashbackMusic.Play();
 
                 ScreenFadeInOut();
 
@@ -208,7 +214,8 @@ public class GameController : MonoBehaviour
 
                 Destroy(flashbacks[0].GetComponent<BoxCollider>());
 
-                //musicManager.flashbackMusic.Play();
+                musicManager.normalMusic.Pause();
+                musicManager.flashbackMusic.Play();
 
                 ScreenFadeInOut();
 
@@ -220,8 +227,8 @@ public class GameController : MonoBehaviour
                 player.GetComponent<PlayerController>().isInFlashback = false;
                 //player.transform.localRotation = Quaternion.identity;
 
-                //musicManager.normalMusic.volume = 0.7f;
-                //musicManager.normalMusic.Play();
+                musicManager.normalMusic.volume = 0.7f;
+                musicManager.normalMusic.Play();
 
                 ScreenFadeInOut();
 

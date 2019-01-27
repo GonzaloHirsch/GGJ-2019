@@ -22,8 +22,7 @@ public class Flashback : MonoBehaviour
         if (door != null)
         {
             this.rotator = door.GetComponent<DoorRotator>();
-            if (rotator.isOpen)
-                rotator.OpenDoor();
+            if (rotator.isOpen) { rotator.OpenDoor(); }
             rotator.canOpen = false;
         }
 

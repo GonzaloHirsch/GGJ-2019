@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = false;
 
     public float walkingSpeed = 10f;
-    public float playerHeightNormal = 1.9f;
+    public float playerHeightNormal = 2f;
     //public float playerHeightFlashback = 5f;
     public Camera camera;
     public GameObject crosshair;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject raycastOut;
 
-    public float maxAngle = 30;
+    public float maxAngle = 40;
 
     private float movementX = 0f;
     private float movementY = 0f;
@@ -141,13 +141,16 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             component = hit.collider.gameObject.GetComponent<InteractableItem>();
-            
+            //Debug.Log(component);
             if (component != null && component.enabled) {
                 eInteractText.gameObject.SetActive(true);
+                //Debug.Log("activeeeeeeeee");
             } else {
                 eInteractText.gameObject.SetActive(false);
+                //Debug.Log("nulooooooooo");
             }
         } else {
+            //Debug.Log("colider nuloooooo");
             eInteractText.gameObject.SetActive(false);
         }
         return component;
