@@ -29,7 +29,6 @@ public class Flashback : MonoBehaviour
                 rotator.interacted = true;
                 StartCoroutine(DoorMoving());
             }
-
         }
 
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
