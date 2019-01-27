@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isAlive = false;
+
     public float walkingSpeed = 10f;
     public float playerHeightNormal = 1.9f;
     public float playerHeightFlashback = 5f;
@@ -40,18 +42,21 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        UpdateMovement();
-        UpdateRotation();
-        this.itemToInteract = CheckIfInteractable();
-        this.doorToRotate = CheckIfDoor();
+        if (isAlive)
+        {
+            UpdateMovement();
+            UpdateRotation();
+            this.itemToInteract = CheckIfInteractable();
+            this.doorToRotate = CheckIfDoor();
 
-        if (itemToInteract != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
-        {
-            this.itemToInteract.Interact();
-        }
-        if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
-        {
-            this.doorToRotate.interacted = true;
+            if (itemToInteract != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                this.itemToInteract.Interact();
+            }
+            if (doorToRotate != null && itemToInteract.enabled && Input.GetKeyDown(KeyCode.E))
+            {
+                this.doorToRotate.interacted = true;
+            }
         }
     }
 
@@ -119,13 +124,13 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
-        InteractableItem collision = null;
+        InteractableItem component = null;
         //Debug.DrawRay(transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
-            collision = hit.collider.gameObject.GetComponent<InteractableItem>();
+            component = hit.collider.gameObject.GetComponent<InteractableItem>();
             
-            if (collision != null) {
+            if (component != null && component.enabled) {
                 eInteractText.gameObject.SetActive(true);
             } else {
                 eInteractText.gameObject.SetActive(false);
@@ -133,20 +138,24 @@ public class PlayerController : MonoBehaviour
         }else {
             eInteractText.gameObject.SetActive(false);
         }
-        return collision;
+        return component;
     }
 
     private DoorRotator CheckIfDoor()
     {
         RaycastHit hit;
         Physics.Raycast(raycastOut.transform.position, playerTransform.forward, out hit, interactDistance);
-        DoorRotator collision = null;
+        DoorRotator component = null;
         Debug.DrawRay(raycastOut.transform.position, playerTransform.forward, Color.green);
         if (hit.collider != null)
         {
-            collision = hit.collider.gameObject.GetComponent<DoorRotator>();
+            component = hit.collider.gameObject.GetComponent<DoorRotator>();
+            //if (component == null || !component.canOpen)
+            //{
+            //    return null;
+            //}
         }
         //Debug.Log(hit.collider.gameObject);
-        return collision;
+        return component;
     }
 }

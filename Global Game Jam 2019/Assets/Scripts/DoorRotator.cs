@@ -7,6 +7,7 @@ public class DoorRotator : MonoBehaviour
     public bool hingeIsLeftFromInside = false;
     public GameObject hinge;
 
+    public bool canOpen = true;
     public bool isOpen = false;
     public bool interacted = false;
     private float timeToOpen = 0;
@@ -29,21 +30,24 @@ public class DoorRotator : MonoBehaviour
 
     public void OpenDoor()
     {
-        if (!isOpen)
+        if (canOpen)
         {
-            if (hingeIsLeftFromInside)
+            if (!isOpen)
             {
-                hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, -90, 0), 1);
+                if (hingeIsLeftFromInside)
+                {
+                    hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, -90, 0), 1);
+                }
+                else
+                {
+                    hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, 90, 0), 1);
+                }
             }
             else
             {
-                hinge.transform.rotation = Quaternion.Slerp(hinge.transform.rotation, Quaternion.Euler(0, 90, 0), 1);
+                hinge.transform.rotation = oldRotation;
             }
+            isOpen = !isOpen;
         }
-        else
-        {
-            hinge.transform.rotation = oldRotation;
-        }
-        isOpen = !isOpen;
     }
 }
