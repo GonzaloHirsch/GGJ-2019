@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Flashback : MonoBehaviour
 {
@@ -24,11 +23,8 @@ public class Flashback : MonoBehaviour
         if (door != null)
         {
             this.rotator = door.GetComponent<DoorRotator>();
-            if (rotator.isOpen) 
-            {
-                rotator.interacted = true;
-                StartCoroutine(DoorRotating());
-            }
+            if (rotator.isOpen) { rotator.OpenDoor(); }
+            rotator.canOpen = false;
         }
 
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
@@ -47,13 +43,6 @@ public class Flashback : MonoBehaviour
         }
         flashbackObjIndex = 0;
         //acá trabar la salida
-    }
-
-    IEnumerator DoorRotating()
-    {
-        //rotator.OpenDoor();
-        yield return new WaitForSeconds(3f);
-        rotator.canOpen = false;
     }
 
     public void nextStep() {
@@ -78,8 +67,7 @@ public class Flashback : MonoBehaviour
             if (door != null)
             {
                 rotator.canOpen = true;
-                rotator.interacted = true;
-                //StartCoroutine(DoorRotating());
+                rotator.OpenDoor();
             }
         }
         else
