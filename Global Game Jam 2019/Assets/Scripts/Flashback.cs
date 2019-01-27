@@ -13,6 +13,7 @@ public class Flashback : MonoBehaviour
     public MeshRenderer[] interactObjMaterials;
     [HideInInspector]
     public Material[] oldMaterials;
+    public float[] outlineWidths;
 
     private int flashbackObjIndex;
     private DoorRotator rotator;
@@ -29,6 +30,7 @@ public class Flashback : MonoBehaviour
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
         interactObjMaterials = new MeshRenderer[flashbackObjects.Length];
         oldMaterials = new Material[flashbackObjects.Length];
+        //outlineWidths = new float[flashbackObjects.Length];
 
         for (int i = 0; i < flashbackObjects.Length; i++) {
             interactObjectsComponents[i] = flashbackObjects[i].GetComponent<InteractableItemFlashback>();
@@ -49,9 +51,9 @@ public class Flashback : MonoBehaviour
         //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
 
         //Cambia al material que tenia antes
-        Debug.Log(flashbackObjects);
+        /*Debug.Log(flashbackObjects);
         Debug.Log(interactObjMaterials);
-        Debug.Log(oldMaterials);
+        Debug.Log(oldMaterials);*/
         interactObjMaterials[flashbackObjIndex].material = oldMaterials[flashbackObjIndex];
 
         //deshabilitar mi interacción
@@ -76,6 +78,7 @@ public class Flashback : MonoBehaviour
         {
             //cambia el material del siguiente
             interactObjectsComponents[flashbackObjIndex + 1].enabled = true;
+            outlineMaterial.SetFloat("Outline width", outlineWidths[flashbackObjIndex]);
             interactObjMaterials[++flashbackObjIndex].material = outlineMaterial;
         }
     }
