@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Flashback : MonoBehaviour
 {
@@ -8,7 +7,6 @@ public class Flashback : MonoBehaviour
     public int flashBackId;
 
     public GameObject[] flashbackObjects;
-    public float[] shaderWidths;
     [HideInInspector]
     public InteractableItemFlashback[] interactObjectsComponents;
     [HideInInspector]
@@ -24,11 +22,8 @@ public class Flashback : MonoBehaviour
         if (door != null)
         {
             this.rotator = door.GetComponent<DoorRotator>();
-            if (rotator.isOpen) 
-            {
-                rotator.interacted = true;
-                StartCoroutine(DoorRotating());
-            }
+            if (rotator.isOpen) { rotator.OpenDoor(); }
+            rotator.canOpen = false;
         }
 
         interactObjectsComponents = new InteractableItemFlashback[flashbackObjects.Length];
@@ -49,18 +44,14 @@ public class Flashback : MonoBehaviour
         //acá trabar la salida
     }
 
-    IEnumerator DoorRotating()
-    {
-        //rotator.OpenDoor();
-        yield return new WaitForSeconds(3f);
-        rotator.canOpen = false;
-    }
-
     public void nextStep() {
         //cambiar mi material
         //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
 
         //Cambia al material que tenia antes
+        Debug.Log(flashbackObjects);
+        Debug.Log(interactObjMaterials);
+        Debug.Log(oldMaterials);
         interactObjMaterials[flashbackObjIndex].material = oldMaterials[flashbackObjIndex];
 
         //deshabilitar mi interacción
@@ -78,15 +69,13 @@ public class Flashback : MonoBehaviour
             if (door != null)
             {
                 rotator.canOpen = true;
-                rotator.interacted = true;
-                //StartCoroutine(DoorRotating());
+                rotator.OpenDoor();
             }
         }
         else
         {
             //cambia el material del siguiente
             interactObjectsComponents[flashbackObjIndex + 1].enabled = true;
-            outlineMaterial.SetFloat("Outline width", shaderWidths[flashbackObjIndex + 1]);
             interactObjMaterials[++flashbackObjIndex].material = outlineMaterial;
         }
     }
