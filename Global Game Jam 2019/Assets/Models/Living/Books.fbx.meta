@@ -10,6 +10,11 @@ ModelImporter:
     400002: Books
     400004: Books.001
     2100000: No Name
+    2100002: Material.019
+    2100004: Material.017
+    2100006: Material.016
+    2100008: Material.015
+    2100010: Material.018
     2300000: Books
     2300002: Books.001
     2300004: //RootNode
@@ -18,6 +23,7 @@ ModelImporter:
     3300004: //RootNode
     4300000: Books.001
     4300002: Books
+    4300004: book2
   externalObjects: {}
   materials:
     importMaterials: 1
