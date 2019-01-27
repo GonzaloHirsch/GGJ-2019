@@ -461,6 +461,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1967825679776394, guid: 209728b25a1dee7498573de68103a125, type: 3}
+      propertyPath: m_Name
+      value: PTK_Wall_Large_4 (49)
+      objectReference: {fileID: 0}
     - target: {fileID: 4937932793602358, guid: 209728b25a1dee7498573de68103a125, type: 3}
       propertyPath: m_LocalPosition.x
       value: -138.818
@@ -512,10 +516,6 @@ PrefabInstance:
     - target: {fileID: 4937932793602358, guid: 209728b25a1dee7498573de68103a125, type: 3}
       propertyPath: m_LocalScale.y
       value: 3.4348433
-      objectReference: {fileID: 0}
-    - target: {fileID: 1967825679776394, guid: 209728b25a1dee7498573de68103a125, type: 3}
-      propertyPath: m_Name
-      value: PTK_Wall_Large_4 (49)
       objectReference: {fileID: 0}
     - target: {fileID: 23967063850504560, guid: 209728b25a1dee7498573de68103a125,
         type: 3}
@@ -1185,7 +1185,6 @@ MonoBehaviour:
   - {fileID: 1746908026}
   - {fileID: 217142832}
   - {fileID: 1670036108}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
@@ -2455,7 +2454,6 @@ MonoBehaviour:
   - {fileID: 411078427}
   - {fileID: 411078235}
   - {fileID: 1733119400}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
@@ -18092,15 +18090,11 @@ MonoBehaviour:
   - {fileID: 1896384499}
   player: {fileID: 1623552116}
   camera: {fileID: 544744763}
-  title: {fileID: 221008156}
-  spaceContinue: {fileID: 1491210903}
-  instructionsText: {fileID: 1044910559}
-  instructions: {fileID: 1766829182}
-  titleBackground: {fileID: 1448343603}
-  gameOverTitle: {fileID: 642369247}
-  gameOverPhrase: {fileID: 1898077153}
-  creditsTitle: {fileID: 360811766}
-  credits: {fileID: 210143815}
+  SpaceContinue: {fileID: 1491210903}
+  Instructions: {fileID: 301065166}
+  Menu: {fileID: 1789761863}
+  gameOver: {fileID: 431494401}
+  Credits: {fileID: 1194309768}
   playthroughItems: {fileID: 1310651447}
   fadingPanel: {fileID: 2071758294}
   musicManagerObject: {fileID: 2110596336}
@@ -18771,7 +18765,6 @@ MonoBehaviour:
   - {fileID: 1746908026}
   - {fileID: 217142832}
   - {fileID: 1670036108}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
@@ -21552,7 +21545,6 @@ MonoBehaviour:
   - {fileID: 411078427}
   - {fileID: 411078235}
   - {fileID: 1733119400}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
@@ -30696,7 +30688,6 @@ MonoBehaviour:
   - {fileID: 272699182}
   - {fileID: 138931789}
   - {fileID: 1033519280}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
@@ -30816,7 +30807,6 @@ MonoBehaviour:
   - {fileID: 272699182}
   - {fileID: 138931789}
   - {fileID: 1033519280}
-  shaderWidths: []
   interactObjectsComponents: []
   interactObjMaterials: []
   oldMaterials: []
