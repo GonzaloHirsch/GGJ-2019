@@ -85,13 +85,15 @@ public class PlayerController : MonoBehaviour
             }
             hasSecret = !hasSecret;
         }
-        else
+        else if (!isInFlashback)
         {
             //Debug.Log(other);
             //Debug.Log("ohlasldfaskdgnsdhfgvjhsdvfgsdf");
             int id = other.gameObject.GetComponent<Flashback>().flashBackId;
 
             Destroy(other);
+
+            isInFlashback = !isInFlashback;
 
             gamecontroller.GetComponent<GameController>().MovePlayer(id);
         }
