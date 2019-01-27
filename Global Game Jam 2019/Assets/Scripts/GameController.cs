@@ -89,6 +89,10 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                if (isCreditsSet)
+                {
+                    Application.Quit();
+                }
                 if (isGameOverSet)
                 {
                     SetUpGameOver(false);
@@ -155,6 +159,7 @@ public class GameController : MonoBehaviour
     private void SetUpCredits(bool state)
     {
         Credits.SetActive(state);
+        SpaceContinue.gameObject.SetActive(state);
     }
 
     public void GameOver()
