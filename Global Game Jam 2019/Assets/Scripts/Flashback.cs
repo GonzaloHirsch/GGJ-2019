@@ -7,6 +7,7 @@ public class Flashback : MonoBehaviour
     public int flashBackId;
 
     public GameObject[] flashbackObjects;
+    public float[] shaderWidths;
     [HideInInspector]
     public InteractableItemFlashback[] interactObjectsComponents;
     [HideInInspector]
@@ -49,9 +50,6 @@ public class Flashback : MonoBehaviour
         //flashbackObjects[flashbackObjIndex].GetComponent<MeshRenderer>().material = oldMeshRenderers[flashbackObjIndex].material;
 
         //Cambia al material que tenia antes
-        Debug.Log(flashbackObjects);
-        Debug.Log(interactObjMaterials);
-        Debug.Log(oldMaterials);
         interactObjMaterials[flashbackObjIndex].material = oldMaterials[flashbackObjIndex];
 
         //deshabilitar mi interacción
@@ -76,6 +74,7 @@ public class Flashback : MonoBehaviour
         {
             //cambia el material del siguiente
             interactObjectsComponents[flashbackObjIndex + 1].enabled = true;
+            outlineMaterial.SetFloat("Outline width", shaderWidths[flashbackObjIndex + 1]);
             interactObjMaterials[++flashbackObjIndex].material = outlineMaterial;
         }
     }
