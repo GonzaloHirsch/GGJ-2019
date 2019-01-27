@@ -145,6 +145,10 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             component = hit.collider.gameObject.GetComponent<DoorRotator>();
+            //if (component == null || !component.canOpen)
+            //{
+            //    return null;
+            //}
         }
         //Debug.Log(hit.collider.gameObject);
         return component;
